@@ -81,7 +81,7 @@
     scrollbar-width: none;
     background: var(--bg2);
     position: sticky;
-    top: 0;
+    top: 48px;
     z-index: 10;
   }
   .tabs::-webkit-scrollbar { display: none; }
@@ -302,11 +302,70 @@
     font-family: 'Cinzel', serif; font-size: 11px;
     letter-spacing: 4px; color: var(--text3);
   }
+  .footer-credit { margin-top:8px; font-size:9px; letter-spacing:3px; opacity:0.45; }
 
   b { color: var(--text); }
+
+  /* SITE NAV */
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(14,14,14,0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    height: 48px;
+    flex-shrink: 0;
+  }
+  .site-home {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--text3);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .site-home:hover { color: var(--gold); }
+  .site-nav-links { display:flex; gap:4px; align-items:center; }
+  .site-nav-link {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text3);
+    text-decoration: none;
+    padding: 6px 12px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    transition: all 0.15s;
+  }
+  .site-nav-link:hover { color: var(--text2); border-color: var(--border); }
+  .site-nav-link.active { color: var(--gold); border-color: var(--border); background: var(--bg2); }
+  @media (max-width:480px) {
+    .site-nav { padding: 0 14px; }
+    .site-nav-link { padding: 6px 8px; font-size: 8px; }
+    .site-home { font-size: 9px; }
+  }
 </style>
 </head>
 <body>
+
+<nav class="site-nav">
+  <a href="index.html" class="site-home">← Home</a>
+  <div class="site-nav-links">
+    <a href="ExpansionHuntRuleBook.html" class="site-nav-link active">Rulebook</a>
+    <a href="ExpansionHuntResources.html" class="site-nav-link">Resources</a>
+  </div>
+</nav>
 
 <div class="hero">
   <div class="hero-eyebrow">Official Game Document · 6 Districts · 30 Players</div>
@@ -579,7 +638,10 @@
 
 </div>
 
-<div class="footer">May The Odds Be Ever In Your Favour</div>
+<div class="footer">
+  May The Odds Be Ever In Your Favour
+  <div class="footer-credit">· Crafted by Sonu ·</div>
+</div>
 
 <script>
   function showTab(id, btn) {

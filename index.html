@@ -141,9 +141,85 @@
     letter-spacing: 4px;
     color: var(--text3);
   }
+  .footer-credit { margin-top:8px; font-size:9px; letter-spacing:3px; opacity:0.45; }
+
+  /* SITE NAV */
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(14,14,14,0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    height: 48px;
+    flex-shrink: 0;
+  }
+  .site-title {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  @media (max-width:480px) { .site-title { display:none; } }
+  .site-nav-links { display:flex; gap:4px; align-items:center; }
+  .site-nav-link {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text3);
+    text-decoration: none;
+    padding: 6px 12px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    transition: all 0.15s;
+  }
+  .site-nav-link:hover { color: var(--text2); border-color: var(--border); }
+
+  /* CARD BADGE */
+  .card-badge {
+    display: inline-flex;
+    align-items: center;
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: #6dcc90;
+    background: rgba(76,175,114,0.1);
+    border: 1px solid rgba(76,175,114,0.3);
+    border-radius: 3px;
+    padding: 3px 8px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  /* HINT */
+  .hint {
+    font-size: 13px;
+    color: var(--text3);
+    margin-top: 28px;
+    max-width: 480px;
+    text-align: center;
+    line-height: 1.7;
+  }
+  .hint a { color:var(--gold); text-decoration:none; border-bottom:1px solid rgba(240,192,64,0.3); transition:all 0.15s; }
+  .hint a:hover { color:var(--gold2); border-bottom-color:var(--gold); }
 </style>
 </head>
 <body>
+
+<nav class="site-nav">
+  <span class="site-title">Hunt the Expansion</span>
+  <div class="site-nav-links">
+    <a href="ExpansionHuntRuleBook.html" class="site-nav-link">Rulebook</a>
+    <a href="ExpansionHuntResources.html" class="site-nav-link">Resources</a>
+  </div>
+</nav>
 
 <div class="hero">
   <div class="hero-eyebrow">A Hidden Role Deduction Game</div>
@@ -152,6 +228,7 @@
 
   <div class="cards">
     <a class="card" href="ExpansionHuntRuleBook.html">
+      <div class="card-badge">★ Start Here</div>
       <div class="card-eye">Official Guide</div>
       <h2>Rulebook</h2>
       <p>Everything you need to learn and run the game — roles, mechanics, round structure, and winning conditions.</p>
@@ -165,9 +242,14 @@
       <span class="card-arrow">View Resources →</span>
     </a>
   </div>
+
+  <p class="hint">New to the game? Open the <a href="ExpansionHuntRuleBook.html">Rulebook</a> first — learn the rules, then come back to the <a href="ExpansionHuntResources.html">Resources</a> page to print and play.</p>
 </div>
 
-<div class="footer">Hunt the Expansion · May The Odds Be Ever In Your Favour</div>
+<div class="footer">
+  Hunt the Expansion · May The Odds Be Ever In Your Favour
+  <div class="footer-credit">· Crafted by Sonu ·</div>
+</div>
 
 </body>
 </html>
