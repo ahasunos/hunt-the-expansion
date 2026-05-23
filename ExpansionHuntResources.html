@@ -43,7 +43,7 @@
   .container { max-width:960px; margin:0 auto; padding:0 24px 80px; }
 
   /* SECTION */
-  .sec { margin:48px 0 20px; scroll-margin-top:116px; }
+  .sec { margin:48px 0 20px; scroll-margin-top:140px; }
   .sec-eye { font-family:'Cinzel',serif; font-size:9px; letter-spacing:4px; color:var(--red); text-transform:uppercase; margin-bottom:6px; }
   .sec h2 { font-family:'Cinzel',serif; font-size:clamp(15px,2.5vw,20px); color:var(--gold); padding-bottom:10px; border-bottom:1px solid var(--border); }
 
@@ -204,6 +204,15 @@
     .site-nav { padding: 0 14px; }
     .site-nav-link { padding: 6px 8px; font-size: 8px; }
     .site-home { font-size: 9px; }
+    /* table scroll */
+    .itbl { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .itbl th, .itbl td { white-space: nowrap; padding: 8px 10px; }
+    /* hero/container */
+    .hero { padding: 32px 16px 24px; }
+    .container { padding: 0 16px 60px; }
+    .sec { margin: 36px 0 14px; }
+    /* nav wraps to 2 rows on small phones — extra scroll clearance */
+    .sec { scroll-margin-top: 160px; }
   }
 </style>
 </head>
