@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hunt the Expansion — Game Resources</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #0e0e0e;
+    --bg2:     #161616;
+    --bg3:     #1f1f1f;
+    --border:  #333;
+    --border2: #444;
+    --gold:    #f0c040;
+    --gold2:   #ffd966;
+    --red:     #e84040;
+    --red2:    #ff6b6b;
+    --green:   #4caf72;
+    --orange:  #f0874a;
+    --blue:    #4a9ef0;
+    --purple:  #a06cf0;
+    --text:    #f0f0f0;
+    --text2:   #bbbbbb;
+    --text3:   #777777;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; font-size:15px; line-height:1.7; }
+
+  /* HERO */
+  .hero { text-align:center; padding:48px 24px 36px; border-bottom:1px solid var(--border); background:linear-gradient(180deg,rgba(240,192,64,0.05) 0%,transparent 100%); }
+  .hero-eye { font-family:'Cinzel',serif; font-size:9px; letter-spacing:5px; color:var(--text3); text-transform:uppercase; margin-bottom:14px; }
+  .hero h1 { font-family:'Cinzel',serif; font-size:clamp(20px,4vw,36px); color:var(--gold); margin-bottom:8px; }
+  .hero p { color:var(--text2); font-size:14px; max-width:520px; margin:0 auto; }
+
+  /* NAV */
+  .nav { display:flex; flex-wrap:wrap; gap:8px; padding:16px 24px; border-bottom:1px solid var(--border); background:var(--bg2); position:sticky; top:0; z-index:10; }
+  .nav a { font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--text3); text-decoration:none; padding:6px 12px; border:1px solid var(--border); border-radius:3px; transition:all 0.15s; }
+  .nav a:hover { color:var(--gold); border-color:var(--gold); }
+
+  /* CONTAINER */
+  .container { max-width:960px; margin:0 auto; padding:0 24px 80px; }
+
+  /* SECTION */
+  .sec { margin:48px 0 20px; scroll-margin-top:80px; }
+  .sec-eye { font-family:'Cinzel',serif; font-size:9px; letter-spacing:4px; color:var(--red); text-transform:uppercase; margin-bottom:6px; }
+  .sec h2 { font-family:'Cinzel',serif; font-size:clamp(15px,2.5vw,20px); color:var(--gold); padding-bottom:10px; border-bottom:1px solid var(--border); }
+
+  /* WORD CARD PRINT GRID */
+  .wcard-section { margin:18px 0; }
+  .wcard-label { font-family:'Cinzel',serif; font-size:10px; letter-spacing:3px; color:var(--text3); text-transform:uppercase; margin-bottom:10px; display:flex; align-items:center; gap:10px; }
+  .wcard-label .pill { padding:3px 10px; border-radius:3px; font-size:9px; }
+  .easy-pill   { background:rgba(76,175,114,0.15); color:var(--green); border:1px solid rgba(76,175,114,0.3); }
+  .medium-pill { background:rgba(240,135,74,0.15);  color:var(--orange); border:1px solid rgba(240,135,74,0.3); }
+  .hard-pill   { background:rgba(232,64,64,0.15);   color:var(--red2); border:1px solid rgba(232,64,64,0.3); }
+  .killer-pill { background:rgba(240,192,64,0.15);  color:var(--gold2); border:1px solid rgba(240,192,64,0.3); }
+
+  .wcard-grid { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:6px; }
+
+  /* Each word card */
+  .wcard {
+    border-radius:6px;
+    padding:14px 18px;
+    font-size:16px;
+    font-weight:600;
+    color:#fff;
+    min-width:80px;
+    text-align:center;
+    border:2px solid rgba(255,255,255,0.12);
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
+  }
+  .wcard .card-round { font-family:'Cinzel',serif; font-size:8px; letter-spacing:2px; opacity:0.6; text-transform:uppercase; }
+
+  /* Round colours */
+  .r1  { background:#2a2a2a; border-color:#555; color:var(--text); }
+  .r2  { background:#2a2600; border-color:#665500; color:#ffe066; }
+  .r3  { background:#2a0018; border-color:#660033; color:#ff80a0; }
+  .r4  { background:#001a2a; border-color:#004488; color:#66aaff; }
+  .r5  { background:#002200; border-color:#005500; color:#66cc88; }
+  .r6  { background:#2a1500; border-color:#663300; color:#ffaa55; }
+  .r7  { background:#2a0000; border-color:#660000; color:#ff7777; }
+  .r8  { background:#150028; border-color:#440066; color:#bb88ff; }
+  .r9  { background:#1a1a1a; border-color:#666;    color:#cccccc; }
+  .r10 { background:#2a2000; border-color:#aa8800; color:var(--gold2); }
+
+  .decoy { border-style:dashed; opacity:0.7; }
+  .decoy::after { content:'DECOY'; font-family:'Cinzel',serif; font-size:7px; letter-spacing:2px; position:absolute; top:4px; right:6px; color:var(--red2); }
+
+  /* META ROW */
+  .wmeta { display:flex; gap:16px; align-items:center; flex-wrap:wrap; margin-bottom:18px; font-size:13px; color:var(--text3); }
+  .wmeta span { display:flex; align-items:center; gap:5px; }
+  .wmeta .dot { width:8px; height:8px; border-radius:50%; display:inline-block; }
+
+  /* SCOREBOARD */
+  .scoreboard { background:var(--bg2); border:1px solid var(--border); border-radius:6px; overflow:hidden; margin:16px 0; }
+  .sb-header { display:grid; grid-template-columns:160px repeat(10,1fr) 80px; gap:0; background:var(--bg3); border-bottom:1px solid var(--border2); }
+  .sb-cell { padding:10px 8px; font-family:'Cinzel',serif; font-size:9px; letter-spacing:1px; color:var(--text3); text-align:center; border-right:1px solid var(--border); }
+  .sb-cell:first-child { text-align:left; padding-left:14px; }
+  .sb-cell:last-child { border-right:none; color:var(--gold); }
+  .sb-row { display:grid; grid-template-columns:160px repeat(10,1fr) 80px; border-bottom:1px solid var(--border); }
+  .sb-row:last-child { border-bottom:none; }
+  .sb-row:hover { background:var(--bg3); }
+  .sb-row .sb-cell { font-family:'Inter',sans-serif; font-size:13px; color:var(--text2); padding:12px 8px; }
+  .sb-row .sb-cell:first-child { font-weight:600; color:var(--text); }
+  .sb-row .sb-cell:last-child { font-weight:700; color:var(--gold); font-size:15px; }
+  .district-dot { width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:6px; }
+  @media(max-width:700px){
+    .sb-header,.sb-row { grid-template-columns:120px repeat(5,1fr) 60px; }
+    .sb-cell:nth-child(n+7):not(:last-child) { display:none; }
+  }
+
+  /* SPY CARD */
+  .spy-cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:12px; margin:16px 0; }
+  .spy-card {
+    background:var(--bg2); border:1px solid var(--border);
+    border-top:3px solid; border-radius:4px; padding:18px;
+  }
+  .spy-card h3 { font-family:'Cinzel',serif; font-size:12px; letter-spacing:1px; margin-bottom:8px; }
+  .spy-card p { color:var(--text2); font-size:13px; }
+  .spy-card .spy-role { font-family:'Cinzel',serif; font-size:10px; letter-spacing:3px; margin-top:10px; padding:6px 10px; border-radius:3px; display:inline-block; }
+
+  /* PRINT INSTRUCTION BOX */
+  .print-box {
+    background:var(--bg3); border:1px solid var(--border2); border-left:3px solid var(--blue);
+    border-radius:4px; padding:16px 20px; margin:16px 0;
+  }
+  .print-box h3 { font-family:'Cinzel',serif; font-size:11px; letter-spacing:1px; color:var(--blue); margin-bottom:8px; }
+  .print-box p { color:var(--text2); font-size:13px; line-height:1.6; }
+  .print-box ul { margin:8px 0 0 16px; color:var(--text2); font-size:13px; }
+  .print-box li { margin-bottom:4px; }
+
+  /* CHECKLIST PRINTABLE */
+  .chk-list { list-style:none; margin:10px 0; }
+  .chk-list li { display:flex; gap:12px; padding:9px 0; border-bottom:1px solid var(--border); color:var(--text2); font-size:14px; align-items:flex-start; }
+  .chk-list li:last-child { border-bottom:none; }
+  .chk-box { width:18px; height:18px; border:1px solid var(--border2); border-radius:3px; flex-shrink:0; margin-top:1px; background:var(--bg3); }
+
+  /* INDIVIDUAL SCORE TABLE */
+  .itbl { width:100%; border-collapse:collapse; margin:14px 0; font-size:14px; }
+  .itbl th { font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; color:var(--text3); text-align:left; padding:10px 14px; border-bottom:1px solid var(--border2); background:var(--bg3); text-transform:uppercase; }
+  .itbl td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text2); }
+  .itbl tr:last-child td { border-bottom:none; }
+  .itbl tr:hover td { background:var(--bg3); }
+
+  /* FOOTER */
+  .footer { text-align:center; padding:32px 24px; border-top:1px solid var(--border); font-family:'Cinzel',serif; font-size:10px; letter-spacing:4px; color:var(--text3); }
+
+  @media print {
+    .nav { display:none; }
+    .wcard { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-eye">Game Resources · Print & Play Pack</div>
+  <h1>Hunt the Expansion — Resources</h1>
+  <p>Everything you need to run the game. Word cards, scoreboard, spy assignment cards, MC checklist, and individual tracking sheet.</p>
+</div>
+
+<div class="nav">
+  <a href="#wordcards">Word Cards</a>
+  <a href="#decoys">Decoy Cards</a>
+  <a href="#scoreboard">Scoreboard</a>
+  <a href="#individual">Individual Tracker</a>
+  <a href="#spy">Spy Cards</a>
+  <a href="#mc">MC Checklist</a>
+</div>
+
+<div class="container">
+
+  <!-- WORD CARDS -->
+  <div class="sec" id="wordcards">
+    <div class="sec-eye">Print & Cut</div>
+    <h2>Word Cards — All 10 Rounds</h2>
+  </div>
+
+  <div class="print-box">
+    <h3>🖨 PRINTING INSTRUCTIONS</h3>
+    <p>Print each round on the matching paper colour so cards from different rounds are immediately distinguishable. Cut each word into a separate card (roughly business-card size works well). Write the round number on the back in pen as a backup.</p>
+    <ul>
+      <li>Round 1 — White · Round 2 — Yellow · Round 3 — Pink · Round 4 — Blue</li>
+      <li>Round 5 — Green · Round 6 — Orange · Round 7 — Red · Round 8 — Purple</li>
+      <li>Round 9 — Silver/Grey · Round 10 — Gold</li>
+    </ul>
+  </div>
+
+  <!-- R1 -->
+  <div class="wcard-section">
+    <div class="wcard-label">Round 1 · NASA <span class="pill easy-pill">Easy</span> <span style="color:var(--text3);font-size:12px;">· White paper · 5 cards</span></div>
+    <div class="wcard-grid">
+      <div class="wcard r1"><div class="card-round">R1</div>National</div>
+      <div class="wcard r1"><div class="card-round">R1</div>Aeronautics</div>
+      <div class="wcard r1"><div class="card-round">R1</div>and</div>
+      <div class="wcard r1"><div class="card-round">R1</div>Space</div>
+      <div class="wcard r1"><div class="card-round">R1</div>Administration</div>
+    </div>
+  </div>
+
+  <!-- R2 -->
+  <div class="wcard-section">
+    <div class="wcard-label">Round 2 · WHO <span class="pill easy-pill">Easy</span> <span style="color:var(--text3);font-size:12px;">· Yellow paper · 3 cards</span></div>
+    <div class="wcard-grid">
+      <div class="wcard r2"><div class="card-round">R2</div>World</div>
+      <div class="wcard r2"><div class="card-round">R2</div>Health</div>
+      <div class="wcard r2"><div class="card-round">R2</div>Organization</div>
+    </div>
+  </div>
+
+  <!-- R3 -->
+  <div class="wcard-section">
+    <div class="wcard-label">Round 3 · FIFA <span class="pill easy-pill">Easy</span> <span style="color:var(--text3);font-size:12px;">· Pink paper · 4 cards</span></div>
+    <div class="wcard-grid">
+      <div class="wcard r3"><div class="card-round">R3</div>Fédération</div>
+      <div class="wcard r3"><div class="card-round">R3</div>Internationale</div>
+      <div class="wcard r3"><div class="card-round">R3</div>de Football</div>
+      <div class="wcard r3"><div class="card-round">R3</div>Association</div>
+    </div>
+  </div>
+
+  <!-- R4 -->
+  <div class="wcard-section">
+    <div class="wcard-label">Round 4 · ISRO <span class="pill medium-pill">Medium</span> <span style="color:var(--text3);font-size:12px;">· Blue paper · 4 cards</span></div>
+    <div class="wcard-grid">
+      <div class="wcard r4"><div class="card-round">R4</div>Indian</div>
+      <div class="wcard r4"><div class="card-round">R4</div>Space</div>
+      <div class="wcard r4"><div class="card-round">R4</div>Research</div>
+      <div class="wcard r4"><div class="card-round">R4</div>Organisation</div>
+    </div>
+  </div>
+
+  <!-- R5 -->
+  <div class="wcard-section">
+    <div class="wcard-label">Round 5 · UNESCO <span class="pill medium-pill">Medium</span> <span style="color:var(--text3);font-size:12px;">· Green paper · 7 cards</span></div>
+    <div class="wcard-grid">
+      <div class="wcard r5"><div class="card-round">R5</div>United</div>
+      <div class="wcard r5"><div class="card-round">R5</div>Nations</div>
+      <div class="wcard r5"><div class="card-round">R5</div>Educational</div>
+      <div class="wcard r5"><div class="card-round">R5</div>Scientific</div>
+      <div class="wcard r5"><div class="card-round">R5</div>and</div>
+      <div class="wcard r5"><div class="card-round">R5</div>Cultural</div>
+      <div class="wcard r5"><div class="card-round">R5</div>Organization</div>
+    </div>
+  </div>
+
+  <!-- R6 -->
+  <div class="wcard-section">
+    <div class="wcard-label">Round 6 · UNICEF <span class="pill medium-pill">Medium</span> <span style="color:var(--text3);font-size:12px;">· Orange paper · 6 cards</span></div>
+    <div class="wcard-grid">
+      <div class="wcard r6"><div class="card-round">R6</div>United</div>
+      <div class="wcard r6"><div class="card-round">R6</div>Nations</div>
+      <div class="wcard r6"><div class="card-round">R6</div>International</div>
+      <div class="wcard r6"><div class="card-round">R6</div>Children's</div>
+      <div class="wcard r6"><div class="card-round">R6</div>Emergency</div>
+      <div class="wcard r6"><div class="card-round">R6</div>Fund</div>
+    </div>
+  </div>
+
+  <!-- R7 -->
+  <div class="wcard-section">
+    <div class="wcard-label">Round 7 · CAPTCHA <span class="pill hard-pill">Hard</span> <span style="color:var(--text3);font-size:12px;">· Red paper · 13 cards</span></div>
+    <div class="wcard-grid">
+      <div class="wcard r7"><div class="card-round">R7</div>Completely</div>
+      <div class="wcard r7"><div class="card-round">R7</div>Automated</div>
+      <div class="wcard r7"><div class="card-round">R7</div>Public</div>
+      <div class="wcard r7"><div class="card-round">R7</div>Turing</div>
+      <div class="wcard r7"><div class="card-round">R7</div>test</div>
+      <div class="wcard r7"><div class="card-round">R7</div>to</div>
+      <div class="wcard r7"><div class="card-round">R7</div>tell</div>
+      <div class="wcard r7"><div class="card-round">R7</div>Computers</div>
+      <div class="wcard r7"><div class="card-round">R7</div>and</div>
+      <div class="wcard r7"><div class="card-round">R7</div>Humans</div>
+      <div class="wcard r7"><div class="card-round">R7</div>Apart</div>
+    </div>
+  </div>
+
+  <!-- R8 -->
+  <div class="wcard-section">
+    <div class="wcard-label">Round 8 · LASER <span class="pill hard-pill">Hard</span> <span style="color:var(--text3);font-size:12px;">· Purple paper · 6 cards</span></div>
+    <div class="wcard-grid">
+      <div class="wcard r8"><div class="card-round">R8</div>Light</div>
+      <div class="wcard r8"><div class="card-round">R8</div>Amplification</div>
+      <div class="wcard r8"><div class="card-round">R8</div>by</div>
+      <div class="wcard r8"><div class="card-round">R8</div>Stimulated</div>
+      <div class="wcard r8"><div class="card-round">R8</div>Emission</div>
+      <div class="wcard r8"><div class="card-round">R8</div>of Radiation</div>
+    </div>
+  </div>
+
+  <!-- R9 -->
+  <div class="wcard-section">
+    <div class="wcard-label">Round 9 · SCUBA <span class="pill killer-pill">Killer</span> <span style="color:var(--text3);font-size:12px;">· Silver paper · 5 cards</span></div>
+    <div class="wcard-grid">
+      <div class="wcard r9"><div class="card-round">R9</div>Self</div>
+      <div class="wcard r9"><div class="card-round">R9</div>Contained</div>
+      <div class="wcard r9"><div class="card-round">R9</div>Underwater</div>
+      <div class="wcard r9"><div class="card-round">R9</div>Breathing</div>
+      <div class="wcard r9"><div class="card-round">R9</div>Apparatus</div>
+    </div>
+  </div>
+
+  <!-- R10 -->
+  <div class="wcard-section">
+    <div class="wcard-label">Round 10 · RADAR <span class="pill killer-pill">Killer</span> <span style="color:var(--text3);font-size:12px;">· Gold paper · 4 cards</span></div>
+    <div class="wcard-grid">
+      <div class="wcard r10"><div class="card-round">R10</div>Radio</div>
+      <div class="wcard r10"><div class="card-round">R10</div>Detection</div>
+      <div class="wcard r10"><div class="card-round">R10</div>And</div>
+      <div class="wcard r10"><div class="card-round">R10</div>Ranging</div>
+    </div>
+  </div>
+
+  <!-- DECOY CARDS -->
+  <div class="sec" id="decoys">
+    <div class="sec-eye">Rounds 7–10</div>
+    <h2>Decoy Cards</h2>
+  </div>
+  <p style="color:var(--text2);font-size:14px;margin-bottom:16px;">Print on the matching round colour paper, but mark with a dashed border or small "?" on the back (MC only). These are hidden among real cards. If a district includes a decoy in their answer they are wrong.</p>
+
+  <div class="wcard-grid">
+    <div class="wcard r7 decoy"><div class="card-round">R7 DECOY</div>Manually</div>
+    <div class="wcard r8 decoy"><div class="card-round">R8 DECOY</div>Focused</div>
+    <div class="wcard r9 decoy"><div class="card-round">R9 DECOY</div>Pressurised</div>
+    <div class="wcard r10 decoy"><div class="card-round">R10 DECOY</div>Ranging System</div>
+  </div>
+  <p style="color:var(--text3);font-size:12px;margin-top:8px;">Each decoy sounds plausible enough to fool a team but is wrong. MC keeps the answer key and confirms correct answers.</p>
+
+  <!-- ANSWER KEY -->
+  <div class="sec">
+    <div class="sec-eye">MC Only</div>
+    <h2>Answer Key</h2>
+  </div>
+  <table class="itbl">
+    <thead><tr><th>Round</th><th>Acronym</th><th>Correct Full Form</th><th>Decoy Word</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td style="color:var(--gold);font-family:'Cinzel',serif;">NASA</td><td>National Aeronautics and Space Administration</td><td>—</td></tr>
+      <tr><td>2</td><td style="color:var(--gold);font-family:'Cinzel',serif;">WHO</td><td>World Health Organization</td><td>—</td></tr>
+      <tr><td>3</td><td style="color:var(--gold);font-family:'Cinzel',serif;">FIFA</td><td>Fédération Internationale de Football Association</td><td>—</td></tr>
+      <tr><td>4</td><td style="color:var(--gold);font-family:'Cinzel',serif;">ISRO</td><td>Indian Space Research Organisation</td><td>—</td></tr>
+      <tr><td>5</td><td style="color:var(--gold);font-family:'Cinzel',serif;">UNESCO</td><td>United Nations Educational Scientific and Cultural Organization</td><td>—</td></tr>
+      <tr><td>6</td><td style="color:var(--gold);font-family:'Cinzel',serif;">UNICEF</td><td>United Nations International Children's Emergency Fund</td><td>—</td></tr>
+      <tr><td>7</td><td style="color:var(--red2);font-family:'Cinzel',serif;">CAPTCHA</td><td>Completely Automated Public Turing test to tell Computers and Humans Apart</td><td style="color:var(--red2);">Manually</td></tr>
+      <tr><td>8</td><td style="color:var(--red2);font-family:'Cinzel',serif;">LASER</td><td>Light Amplification by Stimulated Emission of Radiation</td><td style="color:var(--red2);">Focused</td></tr>
+      <tr><td>9</td><td style="color:var(--gold2);font-family:'Cinzel',serif;">SCUBA</td><td>Self Contained Underwater Breathing Apparatus</td><td style="color:var(--red2);">Pressurised</td></tr>
+      <tr><td>10</td><td style="color:var(--gold2);font-family:'Cinzel',serif;">RADAR</td><td>Radio Detection And Ranging</td><td style="color:var(--red2);">Ranging System</td></tr>
+    </tbody>
+  </table>
+
+  <!-- SCOREBOARD -->
+  <div class="sec" id="scoreboard">
+    <div class="sec-eye">Live Tracking</div>
+    <h2>District Scoreboard</h2>
+  </div>
+  <p style="color:var(--text2);font-size:14px;margin-bottom:14px;">Print this and fill in points after each round, or project it and update live. Each cell gets +5, +3, or +1 per round.</p>
+
+  <div style="overflow-x:auto;">
+    <div class="scoreboard" style="min-width:700px;">
+      <div class="sb-header">
+        <div class="sb-cell">District</div>
+        <div class="sb-cell">R1</div><div class="sb-cell">R2</div><div class="sb-cell">R3</div><div class="sb-cell">R4</div><div class="sb-cell">R5</div>
+        <div class="sb-cell">R6</div><div class="sb-cell">R7</div><div class="sb-cell">R8</div><div class="sb-cell">R9</div><div class="sb-cell">R10</div>
+        <div class="sb-cell">Total</div>
+      </div>
+      <div class="sb-row">
+        <div class="sb-cell"><span class="district-dot" style="background:#e53935"></span>I · Crimson</div>
+        <div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div>
+        <div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div>
+        <div class="sb-cell">0</div>
+      </div>
+      <div class="sb-row">
+        <div class="sb-cell"><span class="district-dot" style="background:#1e88e5"></span>II · Cobalt</div>
+        <div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div>
+        <div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div>
+        <div class="sb-cell">0</div>
+      </div>
+      <div class="sb-row">
+        <div class="sb-cell"><span class="district-dot" style="background:#43a047"></span>III · Verdant</div>
+        <div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div>
+        <div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div>
+        <div class="sb-cell">0</div>
+      </div>
+      <div class="sb-row">
+        <div class="sb-cell"><span class="district-dot" style="background:#fb8c00"></span>IV · Ember</div>
+        <div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div>
+        <div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div>
+        <div class="sb-cell">0</div>
+      </div>
+      <div class="sb-row">
+        <div class="sb-cell"><span class="district-dot" style="background:#8e24aa"></span>V · Violet</div>
+        <div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div>
+        <div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div>
+        <div class="sb-cell">0</div>
+      </div>
+      <div class="sb-row">
+        <div class="sb-cell"><span class="district-dot" style="background:#f0c040"></span>VI · Gold</div>
+        <div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div>
+        <div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div><div class="sb-cell">—</div>
+        <div class="sb-cell">0</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INDIVIDUAL TRACKER -->
+  <div class="sec" id="individual">
+    <div class="sec-eye">Betrayal Leaderboard</div>
+    <h2>Individual Player Tracker</h2>
+  </div>
+  <p style="color:var(--text2);font-size:14px;margin-bottom:14px;">Track personal betrayal points separately. +2 for uncaught betrayal, +3 if they were the assigned spy. Reveal at the end.</p>
+  <table class="itbl">
+    <thead><tr><th>#</th><th>Player Name</th><th>District</th><th>Spy?</th><th>Betrayals</th><th>Caught?</th><th>Points</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td style="color:var(--text3);">______________</td><td style="color:var(--text3);">__________</td><td style="color:var(--text3);">Y / N</td><td style="color:var(--text3);">____</td><td style="color:var(--text3);">____</td><td style="color:var(--gold);">____</td></tr>
+      <tr><td>2</td><td style="color:var(--text3);">______________</td><td style="color:var(--text3);">__________</td><td style="color:var(--text3);">Y / N</td><td style="color:var(--text3);">____</td><td style="color:var(--text3);">____</td><td style="color:var(--gold);">____</td></tr>
+      <tr><td>3</td><td style="color:var(--text3);">______________</td><td style="color:var(--text3);">__________</td><td style="color:var(--text3);">Y / N</td><td style="color:var(--text3);">____</td><td style="color:var(--text3);">____</td><td style="color:var(--gold);">____</td></tr>
+      <tr><td>4</td><td style="color:var(--text3);">______________</td><td style="color:var(--text3);">__________</td><td style="color:var(--text3);">Y / N</td><td style="color:var(--text3);">____</td><td style="color:var(--text3);">____</td><td style="color:var(--gold);">____</td></tr>
+      <tr><td>5</td><td style="color:var(--text3);">______________</td><td style="color:var(--text3);">__________</td><td style="color:var(--text3);">Y / N</td><td style="color:var(--text3);">____</td><td style="color:var(--text3);">____</td><td style="color:var(--gold);">____</td></tr>
+      <tr><td>6</td><td style="color:var(--text3);">______________</td><td style="color:var(--text3);">__________</td><td style="color:var(--text3);">Y / N</td><td style="color:var(--text3);">____</td><td style="color:var(--text3);">____</td><td style="color:var(--gold);">____</td></tr>
+      <tr><td colspan="6" style="color:var(--text3);font-size:12px;font-style:italic;">...add all 30 players</td><td style="color:var(--gold);">____</td></tr>
+    </tbody>
+  </table>
+
+  <!-- SPY CARDS -->
+  <div class="sec" id="spy">
+    <div class="sec-eye">Print & Distribute Privately</div>
+    <h2>Secret Spy Assignment Cards</h2>
+  </div>
+  <p style="color:var(--text2);font-size:14px;margin-bottom:16px;">Print and cut these. Hand one to the spy in each district before the game starts. Keep the rest secret. Do not let them compare cards.</p>
+
+  <div class="spy-cards">
+    <div class="spy-card" style="border-top-color:#e53935;">
+      <h3 style="color:#e53935;">🕵 DISTRICT I — SECRET SPY</h3>
+      <p>You are the Capitol's agent in District Crimson. Your mission: betray your district at least once without being caught.</p>
+      <p style="margin-top:8px;font-size:12px;color:var(--text3);">Reward: +3 personal points per successful uncaught betrayal (vs +2 for others). Your identity is revealed at the very end.</p>
+      <span class="spy-role" style="background:rgba(229,57,53,0.1);color:#e53935;border:1px solid rgba(229,57,53,0.3);">CLASSIFIED · DO NOT SHARE</span>
+    </div>
+    <div class="spy-card" style="border-top-color:#1e88e5;">
+      <h3 style="color:#1e88e5;">🕵 DISTRICT II — SECRET SPY</h3>
+      <p>You are the Capitol's agent in District Cobalt. Your mission: betray your district at least once without being caught.</p>
+      <p style="margin-top:8px;font-size:12px;color:var(--text3);">Reward: +3 personal points per successful uncaught betrayal (vs +2 for others). Your identity is revealed at the very end.</p>
+      <span class="spy-role" style="background:rgba(30,136,229,0.1);color:#1e88e5;border:1px solid rgba(30,136,229,0.3);">CLASSIFIED · DO NOT SHARE</span>
+    </div>
+    <div class="spy-card" style="border-top-color:#43a047;">
+      <h3 style="color:#43a047;">🕵 DISTRICT III — SECRET SPY</h3>
+      <p>You are the Capitol's agent in District Verdant. Your mission: betray your district at least once without being caught.</p>
+      <p style="margin-top:8px;font-size:12px;color:var(--text3);">Reward: +3 personal points per successful uncaught betrayal (vs +2 for others). Your identity is revealed at the very end.</p>
+      <span class="spy-role" style="background:rgba(67,160,71,0.1);color:#43a047;border:1px solid rgba(67,160,71,0.3);">CLASSIFIED · DO NOT SHARE</span>
+    </div>
+    <div class="spy-card" style="border-top-color:#fb8c00;">
+      <h3 style="color:#fb8c00;">🕵 DISTRICT IV — SECRET SPY</h3>
+      <p>You are the Capitol's agent in District Ember. Your mission: betray your district at least once without being caught.</p>
+      <p style="margin-top:8px;font-size:12px;color:var(--text3);">Reward: +3 personal points per successful uncaught betrayal (vs +2 for others). Your identity is revealed at the very end.</p>
+      <span class="spy-role" style="background:rgba(251,140,0,0.1);color:#fb8c00;border:1px solid rgba(251,140,0,0.3);">CLASSIFIED · DO NOT SHARE</span>
+    </div>
+    <div class="spy-card" style="border-top-color:#8e24aa;">
+      <h3 style="color:#8e24aa;">🕵 DISTRICT V — SECRET SPY</h3>
+      <p>You are the Capitol's agent in District Violet. Your mission: betray your district at least once without being caught.</p>
+      <p style="margin-top:8px;font-size:12px;color:var(--text3);">Reward: +3 personal points per successful uncaught betrayal (vs +2 for others). Your identity is revealed at the very end.</p>
+      <span class="spy-role" style="background:rgba(142,36,170,0.1);color:#8e24aa;border:1px solid rgba(142,36,170,0.3);">CLASSIFIED · DO NOT SHARE</span>
+    </div>
+    <div class="spy-card" style="border-top-color:#f0c040;">
+      <h3 style="color:#f0c040;">🕵 DISTRICT VI — SECRET SPY</h3>
+      <p>You are the Capitol's agent in District Gold. Your mission: betray your district at least once without being caught.</p>
+      <p style="margin-top:8px;font-size:12px;color:var(--text3);">Reward: +3 personal points per successful uncaught betrayal (vs +2 for others). Your identity is revealed at the very end.</p>
+      <span class="spy-role" style="background:rgba(240,192,64,0.1);color:#f0c040;border:1px solid rgba(240,192,64,0.3);">CLASSIFIED · DO NOT SHARE</span>
+    </div>
+  </div>
+
+  <!-- MC CHECKLIST -->
+  <div class="sec" id="mc">
+    <div class="sec-eye">For the MC</div>
+    <h2>MC Master Checklist</h2>
+  </div>
+
+  <div class="print-box" style="border-left-color:var(--gold);">
+    <h3 style="color:var(--gold);">📦 DAY-BEFORE PREP</h3>
+    <ul>
+      <li>Print all word cards on correct coloured paper (10 sets, one per round)</li>
+      <li>Cut every word into a separate card. Label round number on the back in pen</li>
+      <li>Print decoy cards for rounds 7–10 on matching paper. Mark back with "X" (MC only)</li>
+      <li>Print spy assignment cards (6 total). Keep them sealed in envelopes by district colour</li>
+      <li>Print scoreboard and individual tracker sheets (or set up projected version)</li>
+      <li>Gather: whistle, marker pen, timer, sticky tape for hiding cards</li>
+    </ul>
+  </div>
+
+  <div class="print-box" style="border-left-color:var(--green); margin-top:12px;">
+    <h3 style="color:var(--green);">🌅 DAY-OF SETUP (BEFORE PLAYERS ARRIVE)</h3>
+    <ul>
+      <li>Mark 6 base tables around the room perimeter with district colour labels</li>
+      <li>Hide Round 1 word cards (NASA) around the auditorium — vary locations well</li>
+      <li>Decide privately which player in each district is the spy. Hand them their envelope</li>
+      <li>Brief any assistant MCs on betrayal rules and what to watch for</li>
+      <li>Test scoreboard visibility from all corners of the room</li>
+    </ul>
+  </div>
+
+  <div class="print-box" style="border-left-color:var(--orange); margin-top:12px;">
+    <h3 style="color:var(--orange);">🎮 DURING THE GAME — PER ROUND</h3>
+    <ul>
+      <li>Announce acronym dramatically. Give 60 seconds for huddle — no movement.</li>
+      <li>Blow whistle. Start 5-minute timer visibly.</li>
+      <li>Walk to a district that calls for judging. Check card order against answer key.</li>
+      <li>Wrong? Announce it. Start their 30-second lockout clock.</li>
+      <li>Correct? Announce winner. Whistle. Game pauses.</li>
+      <li>Open 30-second betrayal accusation window. Resolve claims.</li>
+      <li>Update scoreboard. Hide next round's cards while players stay at bases.</li>
+      <li>Narrate tension: "District IV has 5 cards… District II is still searching…"</li>
+    </ul>
+  </div>
+
+  <div class="print-box" style="border-left-color:var(--red2); margin-top:12px;">
+    <h3 style="color:var(--red2);">🏁 END OF GAME</h3>
+    <ul>
+      <li>Announce district scores dramatically, from 6th to 1st place</li>
+      <li>Reveal the individual betrayal leaderboard</li>
+      <li>Reveal all 6 spy identities one by one — pause for reactions</li>
+      <li>Award Capitol's Favourite to the top betrayer</li>
+      <li>If district tie: sudden-death bonus round with a new acronym</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">Hunt the Expansion · Game Resources Pack · May the Odds Be Ever In Your Favour</div>
+
+</body>
+</html>

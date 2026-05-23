@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hunt the Expansion</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #0e0e0e;
+    --bg2:     #161616;
+    --bg3:     #1f1f1f;
+    --border:  #333;
+    --border2: #444;
+    --gold:    #f0c040;
+    --gold2:   #ffd966;
+    --red:     #e84040;
+    --text:    #f0f0f0;
+    --text2:   #bbbbbb;
+    --text3:   #777777;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 72px 24px 56px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(240,192,64,0.06) 0%, transparent 100%);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: var(--text3);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(22px, 5vw, 48px);
+    color: var(--gold);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .hero .subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(11px, 2vw, 14px);
+    letter-spacing: 3px;
+    color: var(--text3);
+    text-transform: uppercase;
+    margin-bottom: 56px;
+  }
+
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 8px;
+  }
+
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 32px 36px;
+    width: 280px;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.15s, background 0.15s, transform 0.15s;
+    text-align: left;
+  }
+
+  .card:hover {
+    border-color: var(--gold);
+    background: var(--bg3);
+    transform: translateY(-2px);
+  }
+
+  .card-eye {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .card h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .card p {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+
+  .card-arrow {
+    display: inline-block;
+    margin-top: 20px;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--text3);
+    text-transform: uppercase;
+    transition: color 0.15s;
+  }
+
+  .card:hover .card-arrow {
+    color: var(--gold);
+  }
+
+  .footer {
+    text-align: center;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--text3);
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-eyebrow">A Hidden Role Deduction Game</div>
+  <h1>Hunt the Expansion</h1>
+  <div class="subtitle">Choose your destination</div>
+
+  <div class="cards">
+    <a class="card" href="ExpansionHuntRuleBook.html">
+      <div class="card-eye">Official Guide</div>
+      <h2>Rulebook</h2>
+      <p>Everything you need to learn and run the game — roles, mechanics, round structure, and winning conditions.</p>
+      <span class="card-arrow">Read Rulebook →</span>
+    </a>
+
+    <a class="card" href="ExpansionHuntResources.html">
+      <div class="card-eye">Print &amp; Play</div>
+      <h2>Game Resources</h2>
+      <p>Word cards, decoy cards, scoreboard, spy cards, and MC checklist — ready to print and play.</p>
+      <span class="card-arrow">View Resources →</span>
+    </a>
+  </div>
+</div>
+
+<div class="footer">Hunt the Expansion · May The Odds Be Ever In Your Favour</div>
+
+</body>
+</html>

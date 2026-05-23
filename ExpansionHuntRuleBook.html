@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hunt the Expansion — Rulebook</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #0e0e0e;
+    --bg2:       #161616;
+    --bg3:       #1f1f1f;
+    --border:    #333333;
+    --border2:   #444444;
+    --gold:      #f0c040;
+    --gold2:     #ffd966;
+    --red:       #e84040;
+    --red2:      #ff6b6b;
+    --green:     #4caf72;
+    --orange:    #f0874a;
+    --text:      #f0f0f0;
+    --text2:     #bbbbbb;
+    --text3:     #888888;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 60px 24px 44px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(240,192,64,0.06) 0%, transparent 100%);
+  }
+  .hero-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: var(--text3);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(26px, 5vw, 52px);
+    color: var(--gold);
+    line-height: 1.15;
+    margin-bottom: 10px;
+    text-shadow: 0 0 60px rgba(240,192,64,0.25);
+  }
+  .hero-sub {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--text3);
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .hero p {
+    color: var(--text2);
+    font-size: 16px;
+    max-width: 560px;
+    margin: 0 auto;
+    font-style: italic;
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    scrollbar-width: none;
+    background: var(--bg2);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text3);
+    padding: 14px 22px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .tab:hover { color: var(--text2); }
+  .tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* CONTAINER */
+  .container { max-width: 880px; margin: 0 auto; padding: 0 24px 80px; }
+
+  /* SECTION */
+  .section { margin: 44px 0 20px; }
+  .section-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .section h2 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(16px, 2.5vw, 22px);
+    color: var(--gold);
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    padding: 18px 22px;
+    margin: 14px 0;
+  }
+  .card.red  { border-left-color: var(--red); }
+  .card.green { border-left-color: var(--green); }
+  .card h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--gold2);
+    margin-bottom: 8px;
+  }
+  .card.red h3 { color: var(--red2); }
+  .card p { color: var(--text2); margin-bottom: 6px; }
+  .card p:last-child { margin-bottom: 0; }
+
+  /* GRID */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0; }
+  @media(max-width:580px){ .grid2 { grid-template-columns: 1fr; } }
+
+  /* STEPS */
+  .step { display: flex; gap: 16px; margin: 12px 0; align-items: flex-start; }
+  .step-n {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 18px;
+    color: var(--gold);
+    min-width: 28px;
+    opacity: 0.8;
+    line-height: 1.5;
+  }
+  .step-t { color: var(--text2); }
+  .step-t strong { color: var(--text); }
+
+  /* DISTRICT PILLS */
+  .districts { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin: 14px 0; }
+  @media(max-width:480px){ .districts { grid-template-columns: repeat(2,1fr); } }
+  .dpill {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .dswatch { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .dpill span { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 1px; color: var(--text2); }
+
+  /* ROUNDS GRID */
+  .rounds-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px,1fr)); gap: 14px; margin: 18px 0; }
+  .rcard {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--border);
+    border-radius: 4px;
+    padding: 16px 18px;
+  }
+  .rcard.easy   { border-top-color: var(--green); }
+  .rcard.medium { border-top-color: var(--orange); }
+  .rcard.hard   { border-top-color: var(--red); }
+  .rcard.killer { border-top-color: var(--gold); }
+
+  .rhead { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .rnum { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 2px; color: var(--text3); }
+  .rbadge { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 1px; padding: 3px 8px; border-radius: 3px; }
+  .easy   .rbadge { background: rgba(76,175,114,0.15); color: #6dcc90; }
+  .medium .rbadge { background: rgba(240,135,74,0.15); color: #f0a870; }
+  .hard   .rbadge { background: rgba(232,64,64,0.15);  color: var(--red2); }
+  .killer .rbadge { background: rgba(240,192,64,0.15); color: var(--gold2); }
+
+  .racro {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 22px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    margin-bottom: 6px;
+  }
+  .rform { color: var(--text2); font-size: 14px; font-style: italic; line-height: 1.5; }
+  .rwc { margin-top: 10px; font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 2px; color: var(--text3); }
+
+  /* TABLE */
+  .tbl { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 14px; }
+  .tbl th {
+    font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 3px;
+    color: var(--text3); text-transform: uppercase; text-align: left;
+    padding: 10px 14px; border-bottom: 1px solid var(--border2);
+    background: var(--bg3);
+  }
+  .tbl td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text2); }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: var(--bg3); }
+  .tbl .pts { font-family: 'Cinzel', serif; color: var(--gold); font-weight: 600; font-size: 15px; }
+
+  /* RULES LIST */
+  .rlist { list-style: none; margin: 10px 0; }
+  .rlist li { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); color: var(--text2); font-size: 14px; }
+  .rlist li:last-child { border-bottom: none; }
+  .rlist .ico { color: var(--gold); flex-shrink: 0; margin-top: 2px; }
+  .rlist.red .ico { color: var(--red2); }
+
+  /* TIMELINE */
+  .timeline { margin: 18px 0; }
+  .tl-item { display: flex; gap: 14px; position: relative; }
+  .tl-item:not(:last-child)::before {
+    content: ''; position: absolute; left: 73px; top: 30px; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+  .tl-time {
+    font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 1px;
+    color: var(--gold); min-width: 60px; text-align: right; padding-top: 8px;
+  }
+  .tl-dot { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; margin-top: 11px; flex-shrink: 0; }
+  .tl-body { padding: 6px 0 22px; }
+  .tl-body strong { display: block; color: var(--text); font-size: 14px; margin-bottom: 2px; }
+  .tl-body span { color: var(--text2); font-size: 13px; }
+
+  /* BETRAYAL BOX */
+  .bbox {
+    background: rgba(232,64,64,0.07);
+    border: 1px solid rgba(232,64,64,0.3);
+    border-radius: 4px;
+    padding: 22px 24px;
+    margin: 18px 0;
+    position: relative;
+  }
+  .bbox::before {
+    content: '⚔'; position: absolute; top: -13px; left: 50%;
+    transform: translateX(-50%); background: var(--bg); padding: 0 10px; font-size: 18px;
+  }
+  .bbox h3 {
+    font-family: 'Cinzel Decorative', serif; color: var(--red2);
+    font-size: 15px; text-align: center; margin-bottom: 12px;
+  }
+  .bbox p { color: var(--text2); text-align: center; font-style: italic; }
+
+  /* ANNOUNCE */
+  .announce {
+    background: var(--bg3); border: 1px solid var(--border2);
+    border-left: 3px solid var(--gold); border-radius: 4px;
+    padding: 16px 20px; margin: 18px 0;
+    color: var(--text2); font-style: italic; font-size: 15px;
+    position: relative;
+  }
+  .announce::before {
+    content: 'MC SCRIPT'; font-family: 'Cinzel', serif; font-size: 8px;
+    letter-spacing: 3px; color: var(--gold); position: absolute;
+    top: -8px; left: 12px; background: var(--bg3); padding: 0 6px;
+  }
+
+  /* CHECKLIST */
+  .checklist { list-style: none; margin: 10px 0; }
+  .checklist li {
+    display: flex; gap: 12px; padding: 10px 0;
+    border-bottom: 1px solid var(--border); color: var(--text2); font-size: 14px;
+    align-items: flex-start;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist .chk {
+    width: 18px; height: 18px; border: 1px solid var(--border2);
+    border-radius: 3px; flex-shrink: 0; margin-top: 1px;
+    background: var(--bg3);
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center; padding: 36px 24px;
+    border-top: 1px solid var(--border);
+    font-family: 'Cinzel', serif; font-size: 11px;
+    letter-spacing: 4px; color: var(--text3);
+  }
+
+  b { color: var(--text); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-eyebrow">Official Game Document · 6 Districts · 30 Players</div>
+  <h1>Hunt the Expansion</h1>
+  <div class="hero-sub">A Hunger Games Acronym Challenge</div>
+  <p>Six districts. Hidden words. One winner. And someone in your midst is already planning to betray you.</p>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab('overview',this)">Overview</button>
+  <button class="tab" onclick="showTab('rules',this)">Rules</button>
+  <button class="tab" onclick="showTab('betrayal',this)">Betrayal</button>
+  <button class="tab" onclick="showTab('rounds',this)">Rounds</button>
+  <button class="tab" onclick="showTab('scoring',this)">Scoring</button>
+  <button class="tab" onclick="showTab('runsheet',this)">Run Sheet</button>
+</div>
+
+<div class="container">
+
+  <!-- OVERVIEW -->
+  <div id="overview" class="tab-content active">
+    <div class="section">
+      <div class="section-eyebrow">The Premise</div>
+      <h2>What Is This Game?</h2>
+    </div>
+    <div class="card">
+      <p>An acronym is revealed. Its full form — split into individual word cards — is hidden around the auditorium. Districts race to find every word, bring cards back to their base, arrange them in the correct order, and present to the MC first. But players can pocket cards, raid rival bases, and secretly defect.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-eyebrow">The Districts</div>
+      <h2>6 Districts · 5 Players Each</h2>
+    </div>
+    <div class="districts">
+      <div class="dpill"><div class="dswatch" style="background:#e53935"></div><span>District I · Crimson</span></div>
+      <div class="dpill"><div class="dswatch" style="background:#1e88e5"></div><span>District II · Cobalt</span></div>
+      <div class="dpill"><div class="dswatch" style="background:#43a047"></div><span>District III · Verdant</span></div>
+      <div class="dpill"><div class="dswatch" style="background:#fb8c00"></div><span>District IV · Ember</span></div>
+      <div class="dpill"><div class="dswatch" style="background:#8e24aa"></div><span>District V · Violet</span></div>
+      <div class="dpill"><div class="dswatch" style="background:#f0c040"></div><span>District VI · Gold</span></div>
+    </div>
+    <p style="color:var(--text3); font-size:13px; margin-top:6px;">Each round uses a different paper colour so old cards don't bleed into new rounds. Print word cards on matching paper per round.</p>
+
+    <div class="section">
+      <div class="section-eyebrow">Quick Flow</div>
+      <h2>How a Round Works</h2>
+    </div>
+    <div class="step"><div class="step-n">1</div><div class="step-t">MC reveals the acronym. A <strong>60-second strategy huddle</strong> — districts plan who hunts, who guards, who spies.</div></div>
+    <div class="step"><div class="step-n">2</div><div class="step-t">Whistle blows. Players scatter to find <strong>word cards</strong> hidden around the auditorium. Each word of the full form is a separate card.</div></div>
+    <div class="step"><div class="step-n">3</div><div class="step-t">Cards go to your <strong>district base</strong> (a marked table). Bases can be raided — unguarded cards can be taken by anyone.</div></div>
+    <div class="step"><div class="step-n">4</div><div class="step-t">When your district believes they have all words, <strong>arrange cards in order</strong> and call the MC over.</div></div>
+    <div class="step"><div class="step-n">5</div><div class="step-t">MC judges. <strong>First correct district wins the round.</strong> Points awarded. Traitors can be accused.</div></div>
+  </div>
+
+  <!-- RULES -->
+  <div id="rules" class="tab-content">
+    <div class="section">
+      <div class="section-eyebrow">The Law</div>
+      <h2>Core Rules</h2>
+    </div>
+    <div class="grid2">
+      <div class="card"><h3>🗺 Hiding Cards</h3><p>MC team hides all word cards before each round — under chairs, on windowsills, taped to walls. All cards stay within the auditorium boundary.</p></div>
+      <div class="card"><h3>🏠 Base Camps</h3><p>Each district has a marked table as home base. Collected cards must be placed on the table — you cannot hold all cards in your hands indefinitely.</p></div>
+      <div class="card"><h3>🚫 No Snatching</h3><p>You cannot grab a card from another player's hand. You may only take cards from an <b>unguarded base table</b>. No physical contact allowed.</p></div>
+      <div class="card"><h3>⏱ Time Limit</h3><p>Each round has a <b>5-minute time limit</b>. If no district answers correctly in time, only 2nd and 3rd place points are awarded.</p></div>
+      <div class="card"><h3>📋 Presenting</h3><p>Lay all word cards on your base in correct order and shout your district name. The MC walks over to judge. Do not rush the MC.</p></div>
+      <div class="card"><h3>❌ Wrong Answer</h3><p>Incorrect arrangement = <b>30-second lockout</b> before you can attempt again. Other districts may present during that window.</p></div>
+    </div>
+
+    <div class="section">
+      <div class="section-eyebrow">Conduct</div>
+      <h2>Player Conduct</h2>
+    </div>
+    <ul class="rlist">
+      <li><span class="ico">▸</span>No destroying, hiding, or discarding cards outside the play area</li>
+      <li><span class="ico">▸</span>No physically blocking other players</li>
+      <li><span class="ico">▸</span>Verbal bluffing, misdirection, and trash talk are fully allowed</li>
+      <li><span class="ico">▸</span>MC's decision is final on all disputes</li>
+      <li><span class="ico">▸</span>A player ejected for misconduct costs their district 2 points</li>
+    </ul>
+  </div>
+
+  <!-- BETRAYAL -->
+  <div id="betrayal" class="tab-content">
+    <div class="section">
+      <div class="section-eyebrow">The Dark Layer</div>
+      <h2>Betrayal System</h2>
+    </div>
+
+    <div class="bbox">
+      <h3>Anyone Can Betray. The Question Is Whether You Get Away With It.</h3>
+      <p>Loyalty is optional. Points are personal.</p>
+    </div>
+
+    <div class="card red">
+      <h3>HOW TO BETRAY</h3>
+      <p>Pick up a word card from your own district's base. Instead of guarding it, walk it to another district's base and place it there quietly. No announcement required. The art is doing it without your own teammates noticing.</p>
+    </div>
+
+    <div class="grid2">
+      <div class="card red"><h3>IF YOU'RE NOT CAUGHT</h3><p>After the round, if no teammate formally accused you, earn <b>+2 personal points</b>. These appear on a separate individual leaderboard.</p></div>
+      <div class="card red"><h3>IF YOU'RE CAUGHT</h3><p>A teammate must accuse you to the MC during or immediately after the round. If confirmed, you <b>sit out the next round</b>.</p></div>
+    </div>
+
+    <div class="card">
+      <h3>⚠ FALSE ACCUSATION</h3>
+      <p>Accuse a teammate wrongly and your district loses <b>1 point</b>. Don't throw accusations blindly.</p>
+    </div>
+
+    <div class="card red">
+      <h3>🕵 THE SECRET SPY ROLE</h3>
+      <p>Before the game, the MC privately assigns one <b>Secret Spy</b> per district — someone encouraged to betray at least once. A successful uncaught betrayal earns them <b>+3 personal points</b> instead of +2. All spy identities are revealed dramatically at the very end.</p>
+    </div>
+
+    <div class="announce">"May the odds be ever in your favour — and may you trust your district a little less than you trust yourself."</div>
+  </div>
+
+  <!-- ROUNDS -->
+  <div id="rounds" class="tab-content">
+    <div class="section">
+      <div class="section-eyebrow">10 Rounds</div>
+      <h2>Acronyms by Difficulty</h2>
+    </div>
+    <p style="color:var(--text3); font-size:13px; margin-bottom:20px;">Print each round's word cards on the listed paper colour. Cut each word into a separate card before the event.</p>
+
+    <div class="rounds-grid">
+      <div class="rcard easy">
+        <div class="rhead"><span class="rnum">Round 1</span><span class="rbadge">Easy</span></div>
+        <div class="racro">NASA</div>
+        <div class="rform">National Aeronautics and Space Administration</div>
+        <div class="rwc">5 cards · White paper</div>
+      </div>
+      <div class="rcard easy">
+        <div class="rhead"><span class="rnum">Round 2</span><span class="rbadge">Easy</span></div>
+        <div class="racro">WHO</div>
+        <div class="rform">World Health Organization</div>
+        <div class="rwc">3 cards · Yellow paper</div>
+      </div>
+      <div class="rcard easy">
+        <div class="rhead"><span class="rnum">Round 3</span><span class="rbadge">Easy</span></div>
+        <div class="racro">FIFA</div>
+        <div class="rform">Fédération Internationale de Football Association</div>
+        <div class="rwc">4 cards · Pink paper</div>
+      </div>
+      <div class="rcard medium">
+        <div class="rhead"><span class="rnum">Round 4</span><span class="rbadge">Medium</span></div>
+        <div class="racro">ISRO</div>
+        <div class="rform">Indian Space Research Organisation</div>
+        <div class="rwc">4 cards · Blue paper</div>
+      </div>
+      <div class="rcard medium">
+        <div class="rhead"><span class="rnum">Round 5</span><span class="rbadge">Medium</span></div>
+        <div class="racro">UNESCO</div>
+        <div class="rform">United Nations Educational Scientific and Cultural Organization</div>
+        <div class="rwc">7 cards · Green paper</div>
+      </div>
+      <div class="rcard medium">
+        <div class="rhead"><span class="rnum">Round 6</span><span class="rbadge">Medium</span></div>
+        <div class="racro">UNICEF</div>
+        <div class="rform">United Nations International Children's Emergency Fund</div>
+        <div class="rwc">6 cards · Orange paper</div>
+      </div>
+      <div class="rcard hard">
+        <div class="rhead"><span class="rnum">Round 7</span><span class="rbadge">Hard</span></div>
+        <div class="racro">CAPTCHA</div>
+        <div class="rform">Completely Automated Public Turing test to tell Computers and Humans Apart</div>
+        <div class="rwc">13 cards · Red paper</div>
+      </div>
+      <div class="rcard hard">
+        <div class="rhead"><span class="rnum">Round 8</span><span class="rbadge">Hard</span></div>
+        <div class="racro">LASER</div>
+        <div class="rform">Light Amplification by Stimulated Emission of Radiation</div>
+        <div class="rwc">6 cards · Purple paper</div>
+      </div>
+      <div class="rcard killer">
+        <div class="rhead"><span class="rnum">Round 9</span><span class="rbadge">Killer</span></div>
+        <div class="racro">SCUBA</div>
+        <div class="rform">Self Contained Underwater Breathing Apparatus</div>
+        <div class="rwc">5 cards · Silver paper</div>
+      </div>
+      <div class="rcard killer">
+        <div class="rhead"><span class="rnum">Round 10 · Final</span><span class="rbadge">Killer</span></div>
+        <div class="racro">RADAR</div>
+        <div class="rform">Radio Detection And Ranging</div>
+        <div class="rwc">4 cards · Gold paper</div>
+      </div>
+    </div>
+
+    <div class="card red" style="margin-top:8px;">
+      <h3>🃏 THE DECOY CARD</h3>
+      <p>In rounds 7–10, one <b>fake word card</b> is hidden among the real ones — a plausible-sounding word that doesn't belong in the full form. Districts that include the decoy in their arrangement are wrong and face the 30-second lockout. Part of the challenge is knowing the actual full form.</p>
+    </div>
+  </div>
+
+  <!-- SCORING -->
+  <div id="scoring" class="tab-content">
+    <div class="section">
+      <div class="section-eyebrow">Points</div>
+      <h2>Scoring System</h2>
+    </div>
+    <table class="tbl">
+      <thead><tr><th>Outcome</th><th>Points</th><th>Who Gets It</th></tr></thead>
+      <tbody>
+        <tr><td>1st correct answer</td><td class="pts">+5</td><td>District</td></tr>
+        <tr><td>2nd correct answer</td><td class="pts">+3</td><td>District</td></tr>
+        <tr><td>3rd correct answer</td><td class="pts">+1</td><td>District</td></tr>
+        <tr><td>Successful betrayal (uncaught)</td><td class="pts">+2</td><td>Individual</td></tr>
+        <tr><td>Successful betrayal as Secret Spy</td><td class="pts">+3</td><td>Individual</td></tr>
+        <tr><td>Catching a traitor in your district</td><td class="pts">+1</td><td>District</td></tr>
+        <tr><td>Wrong answer (30s lockout only)</td><td class="pts">0</td><td>—</td></tr>
+        <tr><td>False betrayal accusation</td><td class="pts">−1</td><td>District</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section">
+      <div class="section-eyebrow">End Game</div>
+      <h2>Final Tally</h2>
+    </div>
+    <div class="grid2">
+      <div class="card"><h3>🏆 DISTRICT CHAMPION</h3><p>Most points after 10 rounds wins. On a tie, the tied districts face a sudden-death bonus round with a surprise acronym — first correct wins.</p></div>
+      <div class="card red"><h3>🗡 CAPITOL'S FAVOURITE</h3><p>The individual player with the most personal betrayal points gets a separate award. Reveal their identity last, dramatically.</p></div>
+    </div>
+  </div>
+
+  <!-- RUN SHEET -->
+  <div id="runsheet" class="tab-content">
+    <div class="section">
+      <div class="section-eyebrow">For the MC</div>
+      <h2>Game Run Sheet</h2>
+    </div>
+
+    <div class="card">
+      <h3>📦 PREP CHECKLIST (BEFORE EVENT)</h3>
+      <ul class="checklist">
+        <li><div class="chk"></div>Print word cards for all 10 rounds on correct coloured paper. Cut each word into a separate card.</li>
+        <li><div class="chk"></div>Assign one Secret Spy per district privately before players arrive. Slip them a note.</li>
+        <li><div class="chk"></div>Mark 6 base tables around the room perimeter with district colour labels.</li>
+        <li><div class="chk"></div>Set up live scoreboard (whiteboard or projected screen).</li>
+        <li><div class="chk"></div>Hide Round 1 word cards before players enter the room.</li>
+        <li><div class="chk"></div>Brief any assistants on the betrayal rules and what to watch for.</li>
+      </ul>
+    </div>
+
+    <div class="section" style="margin-top:30px;">
+      <div class="section-eyebrow">Per Round</div>
+      <h2>Round Flow</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-time">0:00</div><div class="tl-dot"></div><div class="tl-body"><strong>Reveal the Acronym</strong><span>Display on screen or write on board. Announce it aloud with drama.</span></div></div>
+      <div class="tl-item"><div class="tl-time">0:00–1:00</div><div class="tl-dot"></div><div class="tl-body"><strong>Strategy Huddle</strong><span>Districts huddle at base. No movement yet. 60 seconds to plan roles.</span></div></div>
+      <div class="tl-item"><div class="tl-time">1:00</div><div class="tl-dot"></div><div class="tl-body"><strong>Whistle — Hunt Begins</strong><span>Players scatter. MC and assistants observe for betrayals.</span></div></div>
+      <div class="tl-item"><div class="tl-time">1:00–6:00</div><div class="tl-dot"></div><div class="tl-body"><strong>Active Hunt</strong><span>5-minute window. Districts find, gather, guard, and scheme.</span></div></div>
+      <div class="tl-item"><div class="tl-time">On call</div><div class="tl-dot"></div><div class="tl-body"><strong>District Presents</strong><span>MC walks to base, checks arrangement. Correct = round over. Wrong = 30s lockout, game continues.</span></div></div>
+      <div class="tl-item"><div class="tl-time">After round</div><div class="tl-dot"></div><div class="tl-body"><strong>Betrayal Window</strong><span>30 seconds for teams to file accusations. MC resolves all claims.</span></div></div>
+      <div class="tl-item"><div class="tl-time">Reset</div><div class="tl-dot"></div><div class="tl-body"><strong>MC Hides Next Round's Cards</strong><span>Players stay at bases. 2-minute reset. Update scoreboard visibly.</span></div></div>
+    </div>
+
+    <div class="announce">"Districts — your next word is hidden somewhere in this room. The Capitol is watching. The question is: are your teammates?"</div>
+
+    <div class="card">
+      <h3>⚡ MC ENERGY TIPS</h3>
+      <ul class="rlist">
+        <li><span class="ico">▸</span>Announce scores after each round with dramatic pauses between districts</li>
+        <li><span class="ico">▸</span>Narrate close moments live — "District III is ONE word away!"</li>
+        <li><span class="ico">▸</span>For the final round, reveal the scoreboard slowly before hiding cards</li>
+        <li><span class="ico">▸</span>Reveal all spy identities one by one at the very end</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">May The Odds Be Ever In Your Favour</div>
+
+<script>
+  function showTab(id, btn) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>
